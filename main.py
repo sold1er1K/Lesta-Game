@@ -96,9 +96,33 @@ def About():
                     Menu(0)
 
 
+def Win():
+    load_music('win.mp3', 0.5, -1)
+    surface = pg.Surface((WIDTH, HEIGHT))
+    surface.blit(load_png('menu.jpg'), (0, 0))
+    menuButton = Button('Menu', 180, 80, 80)
+    display = True
+    while display:
+        window.blit(surface, (0, 0))
+        menuButton.draw(surface, 860, 800, 10, 8)
+        print_text(surface, 'Congratulations', 380, 200, WHITE, 'data/fonts/table.ttf', 240)
+        print_text(surface, 'You Win', 680, 420, WHITE, 'data/fonts/table.ttf', 240)
+        pg.display.update()
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                sys.exit()
+            elif event.type == pg.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if menuButton.is_active():
+                        sound_play(button_click_sound)
+                        display = False
+                        Menu(1)
+
+
 def Round():
     load_music('ingame.mp3', 0.5, -1)
-    with open('data/levels/level_1.json') as f:
+    with open('data/levels/test_win.json') as f:
         map = json.load(f)
     level_map = createChipMap(map)
     surface = pg.Surface((WIDTH, HEIGHT))
@@ -109,13 +133,16 @@ def Round():
     display = True
     activeBorder = False
     while display:
+        if win(level_map, 'to_win_1.json'):
+            display = False
+            Win()
         pg.draw.rect(surface, BLACK, (300, 150, 770, 770), 10)
         for element in level_map:
             for chip in level_map[element]:
                 chip.draw(gameZone)
         surface.blit(gameZone, (310, 160))
         backButton.draw(surface, 1500, 500, 14, 8)
-
+        createWiningChips('to_win_1.json', surface)
         window.blit(surface, (0, 0))
         pg.display.update()
         for event in pg.event.get():
@@ -251,6 +278,18 @@ def createChipMap(map):
     return new_map
 
 
+
+def createWiningChips(filename, surf):
+    path = f'data/levels/{filename}'
+    with open(path) as f:
+        map = json.load(f)
+    for key in map:
+        for value in map[key]:
+            image = load_png(GetName(value))
+            pg.draw.rect(image, BLACK, (0, 0, 150, 150), 4)
+            surf.blit(image, (1150, 160 + (int(key) - 1) * 150))
+
+
 def GetChipByCoords(x, y):
     x_index = x / 150
     y_index = y / 150
@@ -259,6 +298,26 @@ def GetChipByCoords(x, y):
     if y_index > int(y_index):
         y_index = int(y_index) + 1
     return int(x_index), str(int(y_index + 1))
+
+
+def win(chips_map, result_file):
+    win = False
+    path = f'data/levels/{result_file}'
+    with open(path) as f:
+        map = json.load(f)
+    result = 0
+    for key, value in map.items():
+        for element in chips_map:
+            if element == key:
+                count = 0
+                for chip in chips_map[element]:
+                    if  chip.filename == GetName(value):
+                        count += 1
+                if count == 5:
+                    result += 1
+    if result == 3:
+        win = True
+    return win
 
 
 def Quit():
