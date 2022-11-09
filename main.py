@@ -143,7 +143,7 @@ def Round():
                             if chip.border:
                                 stop = False
                                 ind = level_map[element].index(chip) - 1
-                                if chip.x != 0:
+                                if chip.x != 0 and level_map[element][ind].filename != 'block.jpg':
                                     temp = chip.x
                                     chip.x = level_map[element][ind].x
                                     level_map[element][ind].x = temp
@@ -159,7 +159,7 @@ def Round():
                             if chip.border:
                                 stop = False
                                 ind = level_map[element].index(chip) + 1
-                                if chip.x != 600:
+                                if chip.x != 600 and level_map[element][ind].filename != 'block.jpg':
                                     temp = chip.x
                                     chip.x = level_map[element][ind].x
                                     level_map[element][ind].x = temp
@@ -188,7 +188,7 @@ def Round():
                                 stop = False
                                 ind = level_map[element].index(chip)
                                 ind_y = str(int(element) - 1)
-                                if chip.y != 0:
+                                if chip.y != 0 and level_map[ind_y][ind].filename != 'block.jpg':
                                     temp = chip.y
                                     chip.y = level_map[ind_y][ind].y
                                     level_map[ind_y][ind].y = temp
@@ -207,7 +207,7 @@ def Round():
                                     stop = False
                                     ind = level_map[element].index(chip)
                                     ind_y = str(int(element) + 1)
-                                    if chip.y != 600:
+                                    if chip.y != 600 and level_map[ind_y][ind].filename != 'block.jpg':
                                         temp = chip.y
                                         chip.y = level_map[ind_y][ind].y
                                         level_map[ind_y][ind].y = temp
