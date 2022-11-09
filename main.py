@@ -6,8 +6,8 @@ from data.elements.Chip import Chip
 import json
 
 
-WIDTH = 1200
-HEIGHT = 800
+WIDTH = 1920
+HEIGHT = 1080
 FPS = 60
 
 pg.init()
@@ -18,7 +18,6 @@ button_click_sound = pg.mixer.Sound('data/audio/button.wav')
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-PURPLE = (238, 192, 252)
 
 
 def Menu(music):
@@ -28,14 +27,14 @@ def Menu(music):
         load_music('menu.mp3', 0.3, -1)
     pg.mouse.set_visible(True)
     display = True
-    startGameButton = Button('Start Game', 410, 90)
-    controlButton = Button('Control', 290, 90)
-    exitButton = Button('Exit', 180, 90)
+    startGameButton = Button('Start Game', 700, 140, 140)
+    controlButton = Button('Control', 480, 140, 140)
+    exitButton = Button('Exit', 280, 140, 140)
     while display:
         window.blit(surface, (0, 0))
-        startGameButton.draw(surface, 395, 250, 20, 12)
-        controlButton.draw(surface, 455, 380, 20, 12)
-        exitButton.draw(surface, 510, 510, 20, 12)
+        startGameButton.draw(surface, 610, 400, 28, 14)
+        controlButton.draw(surface, 720, 600, 22, 14)
+        exitButton.draw(surface, 820, 800, 18, 12)
         pg.display.flip()
 
         for event in pg.event.get():
@@ -51,7 +50,6 @@ def Menu(music):
                     sound_play(button_click_sound)
                     display = False
                     About()
-
                 elif exitButton.is_active():
                     sound_play(button_click_sound)
                     Quit()
@@ -62,32 +60,30 @@ def Menu(music):
 def About():
     surf = pg.Surface((WIDTH, HEIGHT))
     surf.blit(load_png('menu.jpg'), (0, 0))
-    backButton = Button('Back', 180, 80)
+    backButton = Button('Back', 180, 80, 80)
     display = True
     while display:
         window.blit(surf, (0, 0))
-        pg.draw.rect(surf, BLACK, (20, 100, 1160, 680), 4)
-        pg.draw.rect(surf, PURPLE, (24, 104, 1152, 672))
-        print_text(surf, 'Key Assignment', 20, 20, WHITE, 'data/fonts/main.ttf', 80)
-        pg.draw.line(surf, BLACK, [20, 180], [1176, 180], 4)
-        pg.draw.line(surf, BLACK, [20, 300], [1176, 300], 4)
-        pg.draw.line(surf, BLACK, [20, 420], [1176, 420], 4)
-        pg.draw.line(surf, BLACK, [20, 540], [1176, 540], 4)
-        pg.draw.line(surf, BLACK, [20, 660], [1176, 660], 4)
-        pg.draw.line(surf, BLACK, [406, 100], [406, 776], 4)
-        backButton.draw(surf, 1000, 10, 14, 8)
-        print_text(surf, 'KEY', 160, 100, BLACK, 'data/fonts/table.ttf', 90)
-        print_text(surf, 'UP ARROW', 120, 210, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'Move a chip up', 640, 210, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'DOWN ARROW', 90, 330, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'Move a chip down', 610, 330, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'LEFT ARROW', 90, 450, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'Move a chip to the left', 540, 450, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'RIGHT ARROW', 80, 570, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'Move a chip to the right', 535, 570, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'MOUSE LEFT KEY', 60, 690, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'Choose a chip', 640, 690, BLACK, 'data/fonts/table.ttf', 70)
-        print_text(surf, 'DESCRIPTION', 624, 100, BLACK, 'data/fonts/table.ttf', 90)
+        pg.draw.rect(surf, BLACK, (250, 200, 1160, 680), 4)
+        pg.draw.rect(surf, (0, 0, 190), (254, 204, 1152, 672))
+        print_text(surf, 'Key Assignment', 580, 120, WHITE, 'data/fonts/main.ttf', 80)
+        pg.draw.line(surf, BLACK, [250, 336], [1406, 336], 4)
+        pg.draw.line(surf, BLACK, [250, 472], [1406, 472], 4)
+        pg.draw.line(surf, BLACK, [250, 608], [1406, 608], 4)
+        pg.draw.line(surf, BLACK, [250, 744], [1406, 744], 4)
+        pg.draw.line(surf, BLACK, [840, 204], [840, 876], 4)
+        backButton.draw(surf, 1500, 800, 14, 8)
+        print_text(surf, 'KEY', 480, 230, WHITE, 'data/fonts/table.ttf', 90)
+        print_text(surf, 'UP ARROW', 430, 370, WHITE, 'data/fonts/table.ttf', 70)
+        print_text(surf, 'Move a chip up', 970, 370, WHITE, 'data/fonts/table.ttf', 70)
+        print_text(surf, 'DOWN ARROW', 410, 650, WHITE, 'data/fonts/table.ttf', 70)
+        print_text(surf, 'Move a chip down', 940, 650, WHITE, 'data/fonts/table.ttf', 70)
+        print_text(surf, 'LEFT ARROW', 410, 510, WHITE, 'data/fonts/table.ttf', 70)
+        print_text(surf, 'Move a chip to the left', 880, 510, WHITE, 'data/fonts/table.ttf', 70)
+        print_text(surf, 'RIGHT ARROW', 400, 790, WHITE, 'data/fonts/table.ttf', 70)
+        print_text(surf, 'Move a chip to the right', 875, 790, WHITE, 'data/fonts/table.ttf', 70)
+        print_text(surf, 'DESCRIPTION', 950, 230, WHITE, 'data/fonts/table.ttf', 90)
+        print_text(surf, 'click on the left mouse button to choose a chip', 240, 880, WHITE, 'data/fonts/table.ttf', 80)
         pg.display.update()
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -101,44 +97,168 @@ def About():
 
 
 def Round():
-    chipList = []
-    with open('data/levels/level1.json') as f:
-        levelMap = json.load(f)
     load_music('ingame.mp3', 0.5, -1)
-    surf = pg.Surface((WIDTH, HEIGHT))
-    surf.blit(load_png('menu.jpg'), (0, 0))
-    gameZone = pg.Surface((1000, 750))
-    gameZone.fill((238, 192, 252))
-    pg.draw.rect(surf, BLACK, (10, 15, 1020, 770), 10)
-    for element in levelMap:
-        index = 0
-        for value in levelMap[element]:
-            chipList.append(Chip(convertToColor(value), 20 + 200 * index, 25 + 150 * (int(element) - 1)))
-            index += 1
+    with open('data/levels/level1.json') as f:
+        map = json.load(f)
+    level_map = createChipMap(map)
+    surface = pg.Surface((WIDTH, HEIGHT))
+    surface.blit(load_png('menu.jpg'), (0, 0))
+    gameZone = pg.Surface((750, 750))
+    gameZone.fill((169, 169, 169))
+    backButton = Button('Back', 180, 80, 80)
     display = True
+    activeBorder = False
     while display:
-        surf.blit(gameZone, (20, 25))
-        for element in chipList:
-            element.draw_chip(surf)
-        window.blit(surf, (0, 0))
+        pg.draw.rect(surface, BLACK, (300, 150, 770, 770), 10)
+        for element in level_map:
+            for chip in level_map[element]:
+                chip.draw(gameZone)
+        surface.blit(gameZone, (310, 160))
+        backButton.draw(surface, 1500, 500, 14, 8)
+
+        window.blit(surface, (0, 0))
         pg.display.update()
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 pg.quit()
                 sys.exit()
+            elif event.type == pg.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    if backButton.is_active():
+                        sound_play(button_click_sound)
+                        display = False
+                        Menu(1)
+                    for element in level_map:
+                        for chip in level_map[element]:
+                            if chip.is_active() and not activeBorder:
+                                chip.switch_border()
+                                activeBorder = True
+                            elif chip.is_active() and chip.border and activeBorder:
+                                chip.switch_border()
+                                activeBorder = False
+            elif event.type == pg.KEYDOWN:
+                if event.key == pg.K_LEFT:
+                    for element in level_map:
+                        for chip in level_map[element]:
+                            if chip.border:
+                                stop = False
+                                ind = level_map[element].index(chip) - 1
+                                if chip.x != 0:
+                                    temp = chip.x
+                                    chip.x = level_map[element][ind].x
+                                    level_map[element][ind].x = temp
+                                else:
+                                    stop = True
+                                if not stop:
+                                    temp = level_map[element][ind]
+                                    level_map[element][ind] = level_map[element][ind + 1]
+                                    level_map[element][ind + 1] = temp
+                elif event.key == pg.K_RIGHT:
+                    for element in level_map:
+                        for chip in level_map[element]:
+                            if chip.border:
+                                stop = False
+                                ind = level_map[element].index(chip) + 1
+                                if chip.x != 600:
+                                    temp = chip.x
+                                    chip.x = level_map[element][ind].x
+                                    level_map[element][ind].x = temp
+                                else:
+                                    stop = True
+                                if not stop:
+                                    list = []
+                                    ind = level_map[element].index(chip)
+                                    if ind > 0:
+                                        for i in range(ind):
+                                            list.append(level_map[element][i])
+                                        list.append(level_map[element][ind + 1])
+                                        list.append(level_map[element][ind])
+                                        for i in range(ind + 2, 5):
+                                            list.append(level_map[element][i])
+                                    else:
+                                        list.append(level_map[element][ind + 1])
+                                        list.append(level_map[element][ind])
+                                        for i in range(ind + 2, 5):
+                                            list.append(level_map[element][i])
+                                    level_map[element] = list
+                elif event.key == pg.K_UP:
+                    for element in level_map:
+                        for chip in level_map[element]:
+                            if chip.border:
+                                stop = False
+                                ind = level_map[element].index(chip)
+                                ind_y = str(int(element) - 1)
+                                if chip.y != 0:
+                                    temp = chip.y
+                                    chip.y = level_map[ind_y][ind].y
+                                    level_map[ind_y][ind].y = temp
+                                else:
+                                    stop = True
+                                if not stop:
+                                    temp = level_map[element][ind]
+                                    level_map[element][ind] = level_map[ind_y][ind]
+                                    level_map[ind_y][ind] = temp
+                elif event.key == pg.K_DOWN:
+                    count = 0
+                    for element in level_map:
+                        if count == 0:
+                            for chip in level_map[element]:
+                                if chip.border:
+                                    stop = False
+                                    ind = level_map[element].index(chip)
+                                    ind_y = str(int(element) + 1)
+                                    if chip.y != 600:
+                                        temp = chip.y
+                                        chip.y = level_map[ind_y][ind].y
+                                        level_map[ind_y][ind].y = temp
+                                    else:
+                                        stop = True
+                                    if not stop:
+                                        ind = level_map[element].index(chip)
+                                        ind_y = str(int(element) + 1)
+                                        r = level_map[element][ind]
+                                        d = level_map[ind_y][ind]
+
+                                        level_map[ind_y][ind] = r
+                                        level_map[element][ind] = d
+                                        count += 1
 
 
-def convertToColor(char):
+def GetName(char):
+    name = ''
     if char == 'o':
-        return (255, 127, 0)
+        name = 'orange.jpg'
     elif char == 'y':
-        return (255, 255, 0)
+        name = 'yellow.jpg'
     elif char == 'r':
-        return (255, 0, 0)
+        name = 'red.jpg'
     elif char == 'b':
-        return (100, 100, 100)
+        name = 'block.jpg'
     elif char == 'n':
-        return (238, 192, 252)
+        name = 'nothing.jpg'
+    return name
+
+
+def createChipMap(map):
+    new_map = {}
+    for element in map:
+        index = 0
+        list = []
+        for value in map[element]:
+            list.append(Chip(GetName(value), 150 * index, 150 * (int(element) - 1)))
+            index += 1
+        new_map[element] = list
+    return new_map
+
+
+def GetChipByCoords(x, y):
+    x_index = x / 150
+    y_index = y / 150
+    if x_index > int(x_index):
+        x_index = int(x_index) + 1
+    if y_index > int(y_index):
+        y_index = int(y_index) + 1
+    return int(x_index), str(int(y_index + 1))
 
 
 def Quit():

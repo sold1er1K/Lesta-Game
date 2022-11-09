@@ -3,12 +3,13 @@ from data.utils.utils import print_text
 
 
 class Button:
-    def __init__(self, message, width, height):
+    def __init__(self, message, width, height, fsize):
         self.width = width
         self.height = height
-        self.inactive_clr = (160, 9, 220)
-        self.active_clr = (140, 9, 190)
+        self.inactive_clr = (0, 0, 200)
+        self.active_clr = (0, 0, 175)
         self.message = message
+        self.fsize = fsize
         self.x = 0
         self.y = 0
 
@@ -28,5 +29,5 @@ class Button:
         else:
             pg.draw.rect(surface, self.inactive_clr, (x, y, self.width, self.height))
 
-        print_text(surface, self.message, x + indentX, y + indentY)
+        print_text(surface, self.message, x + indentX, y + indentY, font_size=self.fsize)
 
