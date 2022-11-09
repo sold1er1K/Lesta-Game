@@ -122,7 +122,7 @@ def Win():
 
 def Round():
     load_music('ingame.mp3', 0.5, -1)
-    with open('data/levels/test_win.json') as f:
+    with open('data/levels/level_1.json') as f:
         map = json.load(f)
     level_map = createChipMap(map)
     surface = pg.Surface((WIDTH, HEIGHT))
